@@ -4,8 +4,19 @@ void HelloWorld(int x) {
     std::cout << "Hello, World!" << x << std::endl;
 }
 
+int xyz(int a) {
+
+    return 0;
+}
+
 int main() {
-    void (*functionSecond)(int) = HelloWorld;
+    auto TashikFunction = HelloWorld;
+    TashikFunction(10); 
+
+    int * ptr = (int*) xyz;
+    ptr(10);
+
+/*  void (*functionSecond)(int) = HelloWorld;
 
     auto (* function)(int) = HelloWorld;
 
@@ -16,7 +27,7 @@ int main() {
 
     typedef void(*HelloWorldFunction)(int);
 
-    HelloWorldFunction function = HelloWorld;
+    HelloWorldFunction function = HelloWorld; */
 
     std::cin.get();
 }

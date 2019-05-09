@@ -2,6 +2,9 @@
 #include <fstream>
 
 int main(void) {
+
+    // Program to find the size of a file
+
     std::streampos begin, end;
 
     std::ifstream myfile ("example.bin", std::ios::binary);

@@ -31,7 +31,6 @@ int main(void)
         std::cout << "Could not write file : " + fileName << std::endl;
 
     // Read Binary File
-
     Person NewPerson_Read = {};
     std::ifstream inputFile;
     inputFile.open(fileName, std::ios::binary);

@@ -7,6 +7,4 @@ int main() {
     myfile << "Writing this to a file.\n";
     myfile.close();
     return 0;
-
-    
 }

@@ -29,10 +29,13 @@ int main(void)
 
     // .erase is responsible for removing the '\n', while .begin() and .end() are the iterators
     // Same thing done here, just using the iterator methods.
-    std::string::iterator BeginIterator = newString.begin();
-    std::string::iterator EndIterator = newString.end();
-    newString.erase(std::remove(BeginIterator, EndIterator, '\n'), newString.end());
+    newString.erase(std::remove(newString.begin(), newString.end(), '\n'), newString.end());
 
     std::cout << "\nThe string with cleared newlines is: \n\n"
               << newString;
+  
+    std::cout << "\nUsing for range loop: \nce";
+    for ( auto SomeIterator : newString ) {
+        std::cout << SomeIterator;
+    }
 }

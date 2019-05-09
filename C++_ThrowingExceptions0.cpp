@@ -1,8 +1,9 @@
 #include <iostream>
 #include <exception>
 
-struct MyException : public std::exception
+class MyException : public std::exception
 {
+public:
     const char *what() const throw()
     {
         return "C++ Exception";

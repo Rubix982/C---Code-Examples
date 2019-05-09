@@ -18,7 +18,7 @@ int main()
     ios::app : Append to the endof the file
     ios::trunc : If the file exists, delete the content
     ios::in : Open file for reading
-    ios::out : Open file for writing
+    ios::out : Open file for writingط
     ios::ate : Open writing and move to the end of the file
     */
 

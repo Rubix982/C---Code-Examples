@@ -1,5 +1,6 @@
 #include <iostream>
 #include <thread>
+using namespace std;
 
 bool is_true = false;
 

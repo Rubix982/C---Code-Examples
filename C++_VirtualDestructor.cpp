@@ -3,7 +3,7 @@
 class Base {
     public:
         Base() { std::cout << "Base contructor called!" << std::endl; }
-        virtual ~Base() { std::cout << "Base destructor called!" << std::endl; }
+        ~Base() { std::cout << "Base destructor called!" << std::endl; }
 };
 
 class Derived : public Base {
@@ -26,6 +26,4 @@ int main(void)
 
     Base* poly = new Derived();
     delete poly;
-
-    std::cin.get();
 }
