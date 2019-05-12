@@ -19,7 +19,7 @@ classname can accept a variable number of arguments, as in these examples */
 
 #include <vector>
 
-template<typename... Arguments> clas vtclass;
+template<typename... Arguments> class vtclass;
 vtclass< > vinstance1;
 vtclass<int> vtinstance2;
 vtclass<float, bool> vinstance3;
