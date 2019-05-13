@@ -1,0 +1,4 @@
+# The gitignore file for C++ Code And Samples
+
+*.exe
+.vscode

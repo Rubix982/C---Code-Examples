@@ -1,8 +1,8 @@
-
 // CPP program to illustrate
 // std::find_if and std::find_if_not
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 // Returns true if argument is odd
 bool IsOdd(int i)

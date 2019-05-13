@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+
 using namespace std;
 int main()
 {
@@ -14,8 +15,7 @@ int main()
     vector<int>::iterator ip;
 
     // Using std::find_end
-    ip = std::find_end(v.begin(), v.end(), v1.begin(),
-                       v1.end());
+    ip = std::find_end(v.begin(), v.end(), v1.begin(), v1.end());
 
     // Displaying the index where the last common occurrence
     // begins

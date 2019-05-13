@@ -19,8 +19,7 @@ int main()
    // printing new vector 
    cout << "The new vector elements entered using copy() : "; 
    for(int i=0; i<v2.size(); i++) 
-   cout << v2[i] << " "; 
-     
+      cout << v2[i] << " "; 
    cout << endl; 
      
    // using copy_n() to copy 1st 4 elements 
@@ -29,6 +28,5 @@ int main()
    // printing new vector 
    cout << "The new vector elements entered using copy_n() : "; 
    for(int i=0; i<v3.size(); i++) 
-   cout << v3[i] << " "; 
-    
+      cout << v3[i] << " "; 
 } 

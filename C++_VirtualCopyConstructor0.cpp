@@ -3,9 +3,9 @@
 using namespace std;
 
 //// LIBRARY SRART
-class Base
+struct Base
 {
-  public:
+
     Base() {}
 
     virtual // Ensures to invoke actual object destructor
@@ -22,9 +22,8 @@ class Base
     virtual Base *Clone() = 0;
 };
 
-class Derived1 : public Base
+struct Derived1 : public Base
 {
-  public:
     Derived1()
     {
         cout << "Derived1 created" << endl;
@@ -51,9 +50,8 @@ class Derived1 : public Base
     }
 };
 
-class Derived2 : public Base
+struct Derived2 : public Base
 {
-  public:
     Derived2()
     {
         cout << "Derived2 created" << endl;
@@ -80,9 +78,9 @@ class Derived2 : public Base
     }
 };
 
-class Derived3 : public Base
+struct Derived3 : public Base
 {
-  public:
+public:
     Derived3()
     {
         cout << "Derived3 created" << endl;
@@ -113,8 +111,8 @@ class Derived3 : public Base
 // But is more relevant to limit it's scope to Base
 Base *Base::Create(int id)
 {
-    // Just expand the if-else ladder, if new Derived class is created
-    // User need not be recompiled to create newly added class objects
+    // Just expand the if-else ladder, if new Derived struct is created
+    // User need not be recompiled to create newly added struct objects
 
     if (id == 1)
     {
@@ -132,9 +130,8 @@ Base *Base::Create(int id)
 //// LIBRARY END
 
 //// UTILITY SRART
-class User
+struct User
 {
-  public:
     User() : pBase(0)
     {
         // Creates any object of Base heirarchey at runtime
@@ -175,13 +172,13 @@ class User
         delete pNewBase;
     }
 
-  private:
+private:
     Base *pBase;
 };
 
 //// UTILITY END
 
-//// Consumer of User (UTILITY) class
+//// Consumer of User (UTILITY) struct
 int main()
 {
     User *user = new User();
