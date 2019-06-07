@@ -1,17 +1,18 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <sstream>
 
-string simplifyPath(string path)
+std::string simplifyPath(std::string path)
 {
     std::string res, tmp;
     std::vector<std::string> stk;
     std::stringstream ss(path);
     while (std::getline(ss, tmp, '/'))
     {
-        if (tmp == "" or tmp == ".")
+        if (tmp == "" || tmp == ".")
             continue;
-        if (tmp == ".." and !stk.empty())
+        if (tmp == ".." && !stk.empty())
             stk.pop_back();
         else if (tmp != "..")
             stk.push_back(tmp);
