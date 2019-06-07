@@ -21,7 +21,7 @@ struct Tree
 
 Tree *lookUp(struct Tree *node, char key)
 {
-    if (node == NULL)
+    if (node == nullptr )
         return node;
 
     if (node->data == key)
@@ -37,39 +37,29 @@ Tree *lookUp(struct Tree *node, char key)
 
 Tree *leftMost(struct Tree *node)
 {
-    if (node == NULL)
-        return NULL;
-    while (node->left != NULL)
+    if (node == nullptr )
+        return nullptr ;
+    while (node->left != nullptr )
         node = node->left;
     return node;
 }
 
-struct Tree *newTreeNode(int data)
-{
-    Tree *node = new Tree;
-    node->data = data;
-    node->left = NULL;
-    node->right = NULL;
-    node->parent = NULL;
-
-    return node;
+struct Tree *newTreeNode(int data) {
+    return new Tree {data, nullptr, nullptr, nullptr};
 }
 
-struct Tree *insertTreeNode(struct Tree *node, int data)
-{
+struct Tree *insertTreeNode(struct Tree *node, int data) {
     static Tree *p;
     Tree *retNode;
 
-    //if(node != NULL) p = node;
+    //if(node != nullptr ) p = node;
 
-    if (node == NULL)
-    {
-        retNode = newTreeNode(data);
+    if (node == nullptr ) {
+    retNode = newTreeNode(data);
         retNode->parent = p;
         return retNode;
     }
-    if (data <= node->data)
-    {
+    if (data <= node->data) {
         p = node;
         node->left = insertTreeNode(node->left, data);
     }
@@ -81,10 +71,21 @@ struct Tree *insertTreeNode(struct Tree *node, int data)
     return node;
 }
 
+/*
+The code isBST() is the answer to the question:
+Given a binary tree, programmatically we need to 
+prove it is a binary search tree.
+
+If the given binary tree is a binary search tree, 
+then the inorder traversal should output the elements 
+in increasing order.
+
+We make use of this property of inorder traversal to 
+check whether the given binary tree is a BST or not.  */
 void isBST(struct Tree *node)
 {
     static int lastData = INT_MIN;
-    if (node == NULL)
+    if (node == nullptr )
         return;
 
     isBST(node->left);
@@ -102,17 +103,25 @@ void isBST(struct Tree *node)
     return;
 }
 
+/*
+Size of a binary tree 
+is the total number of nodes in the tree. */
 int treeSize(struct Tree *node)
 {
-    if (node == NULL)
+    if (node == nullptr )
         return 0;
     else
-        return treeSize(node->left) + 1 + treeSize(node->right);
+        return treeSize(node->left) + treeSize(node->right) + 1;
 }
 
+/*
+Maximum Depth
+The number of nodes along the longest 
+path from the root node down to the farthest leaf node. 
+The maxDepth of the empty tree is 0. */
 int maxDepth(struct Tree *node)
 {
-    if (node == NULL || (node->left == NULL && node->right == NULL))
+    if (node == nullptr  || (node->left == nullptr  && node->right == nullptr ))
         return 0;
 
     int leftDepth = maxDepth(node->left);
@@ -121,9 +130,14 @@ int maxDepth(struct Tree *node)
     return leftDepth > rightDepth ? leftDepth + 1 : rightDepth + 1;
 }
 
+/*
+Minimum Depth 
+The number of nodes along the shortest 
+path from the root node down to the farthest leaf node. 
+The maxDepth of the empty tree is 0. */
 int minDepth(struct Tree *node)
 {
-    if (node == NULL || (node->left == NULL && node->right == NULL))
+    if (node == nullptr  || (node->left == nullptr  && node->right == nullptr ))
         return 0;
 
     int leftDepth = minDepth(node->left);
@@ -132,19 +146,19 @@ int minDepth(struct Tree *node)
     return leftDepth < rightDepth ? leftDepth + 1 : rightDepth + 1;
 }
 
-bool isBalanced(struct Tree *node)
-{
-    if (maxDepth(node) - minDepth(node) <= 1)
-        return true;
-    else
-        return false;
+/*
+A balanced binary tree is commonly defined as a binary tree 
+in which the height of the two subtrees of every node never 
+differ by more than 1.*/
+bool isBalanced(struct Tree *node) {
+    return (maxDepth(node) - minDepth(node) <= 1);
 }
 
 /* Tree Minimum */
 Tree *minTree(struct Tree *node)
 {
-    if (node == NULL)
-        return NULL;
+    if (node == nullptr )
+        return nullptr ;
     while (node->left)
         node = node->left;
     return node;
@@ -162,12 +176,11 @@ Tree *maxTree(struct Tree *node)
 Tree *succesorInOrder(struct Tree *node)
 {
     /* if the node has right child, seccessor is Tree-Minimum */
-    if (node->right != NULL)
+    if (node->right != nullptr )
         return minTree(node->right);
 
     Tree *y = node->parent;
-    while (y != NULL && node == y->right)
-    {
+    while (y != nullptr && node == y->right) {
         node = y;
         y = y->parent;
     }
@@ -178,14 +191,13 @@ Tree *succesorInOrder(struct Tree *node)
 Tree *predecessorInOrder(struct Tree *node)
 {
     /* if the node has left child, predecessor is Tree-Maximum */
-    if (node->left != NULL)
+    if (node->left != nullptr )
         return maxTree(node->left);
 
     Tree *y = node->parent;
     /* if it does not have a left child, 
 	predecessor is its first left ancestor */
-    while (y != NULL && node == y->left)
-    {
+    while (y != nullptr && node == y->left) {
         node = y;
         y = y->parent;
     }
@@ -194,10 +206,9 @@ Tree *predecessorInOrder(struct Tree *node)
 
 void reverseOrderPrint(struct Tree *node)
 {
-    if (node == NULL)
+    if (node == nullptr )
         return;
-    if (node->left == NULL && node->right == NULL)
-    {
+    if (node->left == nullptr && node->right == nullptr ) {
         std::cout << node->data << " ";
         return;
     }
@@ -210,8 +221,9 @@ void reverseOrderPrint(struct Tree *node)
 Tree *lowestCommonAncestor(Tree *node, Tree *p, Tree *q)
 {
     Tree *left, *right;
-    if (node == NULL)
-        return NULL;
+
+    if ( node == nullptr )
+        return nullptr ;
     if (node->left == p || node->left == q || node->right == p || node->right == q)
         return node;
 
@@ -225,22 +237,20 @@ Tree *lowestCommonAncestor(Tree *node, Tree *p, Tree *q)
 
 void clear(struct Tree *node)
 {
-    if (node != NULL)
+    if (node != nullptr )
     {
         clear(node->left);
         clear(node->right);
         delete node;
     }
 }
-/* print tree in order */
-/* 1. Traverse the left subtree. 
-   2. Visit the root. 
-   3. Traverse the right subtree. 
-*/
-
+/* Print tree in order 
+    1. Traverse the left subtree. 
+    2. Visit the root. 
+    3. Traverse the right subtree. */
 void printTreeInOrder(struct Tree *node)
 {
-    if (node == NULL)
+    if (node == nullptr )
         return;
 
     printTreeInOrder(node->left);
@@ -255,7 +265,7 @@ void printTreeInOrder(struct Tree *node)
 */
 void printTreePostOrder(struct Tree *node)
 {
-    if (node == NULL)
+    if (node == nullptr )
         return;
 
     printTreePostOrder(node->left);
@@ -263,14 +273,13 @@ void printTreePostOrder(struct Tree *node)
     cout << node->data << " ";
 }
 
-/* print in preorder */
-/* 1. Visit the root. 
-   2. Traverse the left subtree. 
-   3. Traverse the right subtree. 
-*/
+/*  Print in preorder 
+    1. Visit the root. 
+    2. Traverse the left subtree. 
+    3. Traverse the right subtree. */
 void printTreePreOrder(struct Tree *node)
 {
-    if (node == NULL)
+    if (node == nullptr )
         return;
 
     cout << node->data << " ";
@@ -281,25 +290,25 @@ void printTreePreOrder(struct Tree *node)
 /* In reverse of printTreeInOrder() */
 void printTreeReverseOrder(struct Tree *node)
 {
-    if (node == NULL)
+    if (node == nullptr )
         return;
-    if (node->left == NULL && node->right == NULL)
-    {
-        cout << node->data << " ";
+    if (node->left == nullptr  && node->right == nullptr ) {
+        std::cout << node->data << " ";
         return;
     }
 
-    printTreeReverseOrder(node->right);
-    cout << node->data << " ";
     printTreeReverseOrder(node->left);
+    cout << node->data << " ";
+    printTreeReverseOrder(node->right);
 }
+
 /* recursion routine to find path */
 void pathFinder(struct Tree *node, int path[], int level)
 {
-    if (node == NULL)
+    if (node == nullptr )
         return;
     // save leaf node
-    if (node->left == NULL && node->right == NULL)
+    if (node->left == nullptr  && node->right == nullptr )
     {
         path[level] = node->data;
         for (int i = 0; i <= level; i++)
@@ -315,13 +324,12 @@ void pathFinder(struct Tree *node, int path[], int level)
     pathFinder(node->right, path, level + 1);
 }
 
-bool matchTree(Tree *r1, Tree *r2)
-{
+bool matchTree(Tree *r1, Tree *r2) {
     /* Nothing left in the subtree */
-    if (r1 == NULL && r2 == NULL)
+    if (r1 == nullptr && r2 == nullptr )
         return true;
     /* Big tree empty and subtree not found */
-    if (r1 == NULL || r2 == NULL)
+    if (r1 == nullptr || r2 == nullptr )
         return false;
     /* Not matching */
     if (r1->data != r2->data)
@@ -330,21 +338,20 @@ bool matchTree(Tree *r1, Tree *r2)
             matchTree(r1->right, r2->right));
 }
 
-bool subTree(Tree *r1, Tree *r2)
-{
+bool subTree(Tree *r1, Tree *r2) {
     /*Big tree empty and subtree not found */
-    if (r1 == NULL)
+    if (r1 == nullptr )
         return false;
-    if (r1->data == r2->data)
-        if (matchTree(r1, r2))
-            return true;
+    if (r1->data == r2->data && matchTree(r1, r2))
+        return true;
+    
     return (subTree(r1->left, r2) || subTree(r1->right, r2));
 }
 
 bool isSubTree(Tree *r1, Tree *r2)
 {
     /* Empty tree is subtree */
-    if (r2 == NULL)
+    if (r2 == nullptr )
         return true;
     else
         return subTree(r1, r2);
@@ -352,9 +359,8 @@ bool isSubTree(Tree *r1, Tree *r2)
 
 /* change a tree so that the roles of the left 
 and right hand pointers are swapped at every node */
-void mirror(Tree *r)
-{
-    if (r == NULL)
+void mirror(Tree *r) {
+    if (r == nullptr )
         return;
 
     Tree *tmp;
@@ -371,25 +377,21 @@ void mirror(Tree *r)
 Tree *addToBST(char arr[], int start, int end)
 {
     if (end < start)
-        return NULL;
+        return nullptr;
     int mid = (start + end) / 2;
 
-    Tree *r = new Tree;
-    r->data = arr[mid];
-    r->left = addToBST(arr, start, mid - 1);
-    r->right = addToBST(arr, mid + 1, end);
-    return r;
+    return new Tree{arr[mid], addToBST(arr, start, mid - 1),
+                        addToBST(arr, mid + 1, end)};
 }
 
-Tree *createMinimalBST(char arr[], int size)
-{
+Tree *createMinimalBST(char arr[], int size) {
     return addToBST(arr, 0, size - 1);
 }
 
 /* Breadth first traversal using queue */
 void BreadthFirstTraversal(Tree *root)
 {
-    if (root == NULL)
+    if (root == nullptr )
         return;
     deque<Tree *> queue;
     queue.push_back(root);
@@ -400,9 +402,9 @@ void BreadthFirstTraversal(Tree *root)
         std::cout << p->data << " ";
         queue.pop_front();
 
-        if (p->left != NULL)
+        if (p->left != nullptr )
             queue.push_back(p->left);
-        if (p->right != NULL)
+        if (p->right != nullptr )
             queue.push_back(p->right);
     }
     std::cout << endl;
@@ -411,7 +413,7 @@ void BreadthFirstTraversal(Tree *root)
 /* get the level of a node element: root level = 0 */
 int getLevel(struct Tree *node, int elm, int level)
 {
-    if (node == NULL)
+    if (node == nullptr )
         return 0;
     if (elm == node->data)
         return level;
@@ -424,7 +426,7 @@ int getLevel(struct Tree *node, int elm, int level)
 /* This code prints out all nodes at the same depth (level) */
 void BreadthFirst_LevelElement_Print(struct Tree *root, vector<vector<int>> &v)
 {
-    if (root == NULL)
+    if (root == nullptr )
         return;
     deque<Tree *> q;
     q.push_back(root);
@@ -450,10 +452,10 @@ and fills elements as we traverse (preOrder) */
 
 void levelPrint(struct Tree *node, vector<vector<char>> &elm, int level)
 {
-    if (node == NULL)
+    if (node == nullptr )
         return;
     // leaf nodes
-    if (node->left == NULL && node->right == NULL)
+    if (node->left == nullptr  && node->right == nullptr )
     {
         elm[level].push_back(node->data);
         return;
@@ -469,7 +471,7 @@ void NthMax(struct Tree *t)
 {
     static int n_th_max = 5;
     static int num = 0;
-    if (t == NULL)
+    if (t == nullptr )
         return;
     NthMax(t->right);
     num++;
@@ -497,7 +499,7 @@ void TreeToArray(struct Tree *node, int a[])
 void level_even_odd(struct Tree *node)
 {
     vector<char> evenVec, oddVec;
-    if (node == NULL)
+    if (node == nullptr )
         return;
     deque<struct Tree *> que;
     que.push_back(node);
